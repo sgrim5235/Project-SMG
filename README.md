@@ -2,6 +2,8 @@
 GISC3200K Final Project
 
 Please view in "RAW" format to view appropriately.
+***SEE OPEN ISSUE FOR PHOTOS OF CODE USE IN ARCMAP***
+Will attach data to use if you want to test.
 
 The attached Python file includes codes to simplify the narrowing of data in ArcMap for a specific issue.
 In an ArcMap document, I needed to identify certain elements within 11 different attribute tables that each have thousands
