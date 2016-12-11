@@ -1,36 +1,54 @@
 import arcpy
-import os
-import sys
 
 
-#Added Extra Field to 2006 Attribute Table to Calculate Duplicate Fires
-#Named Field "DUPS"
+#Added Extra Field to 2006-2016 Attribute Tables to Calculate Duplicate Fires
+#Named Field "DUPS" before running any scripts
 
-#Used following python script to calculate duplicates
+#Use following python script to calculate duplicates in
+#new "DUPS" field in Field Calculator window
 dup_dict={}
 def dups(x):
+    """Takes a field from the attribute table and
+
+    in order to add values to the new field "DUPS"
+
+    showing how many times an element from the chosen
+
+    field are duplicated. Returns results into "DUPS" field.
+
+    """
     dup_dict[x]=dup_dict.setdefault(x,-1)+1
     return dup_dict[x]
 
-#Enter into Python Window to find days in 2006 that had fifty or more fires
-#This code saves me from individually going through every single date
-#In every single year and building the query to show me individual repeated dates
-#And physically counting all the duplicates for all ten years
-#Using this data to find hotspots
-#Set for days with fifty+ fires
 
-cursor_location=arcpy.da.SearchCursor("2006",["DUPS","JDATE"]) #Change year accordingly
-test=(49.0, 2006005) #Tests for days that had fifty or more fire and shows the Julian date as an identifier
-fifty=[] #Empty list to put for loop results into
-#Must find first Julian Date from attribute table to use here in order for it to work
+#Change working directory to location of this file
+#Enter following scripts into python window of ArcMap in order
+    #to find days of every year that had more than fifty fires on said day.
+    #Will need to do this code for each individual year
+    #To find appropriate Julian date, open the year's attribute table
+    #And note what the first Julian date is (may need to sort field ascending
+
+
+fifty=[]
+testrow=(49.0, #insert first julian date from attribute table)
+cursor_location=arcpy.da.SearchCursor(#layer ie "2006",["DUPS", "JDATE"])
 for row in cursor_location:
-    if row>test:
+    if row>testrow:
         fifty.append(row)
 
-#Make function that gets rid of the days that are printed multiple times
-        #Due to having more than one number over 49
+#Using the above script appropriately will yield a list (fifty) of
+#All the Julian Dates of that year that have "DUPS" numbers greater
+#Than 49.0 and also print their significant Julian Date
+
 
 def rid_dupes(x):
+    """Takes list and returns the same list without tuples that have
+
+    elements that are repeated due to occasional Julian Dates that
+
+    have 51, 52, 53 etc fires being printed in said list more than once
+
+    """
     uniques=set()
     for i in x:
         if not uniques.intersection(i):
@@ -38,7 +56,9 @@ def rid_dupes(x):
             uniques.update(i)
 
 
-#List the days with 50+ fires to use to run hot spot tool
-list(rid_dupes(fifty))
+#List the days with more than 50 fires to use to run hot spot tool
+def fifty_plus_days(listname):
+    return(list(rid_dupes(listname)))
 
-#Will have to do same tests for every year
+
+
