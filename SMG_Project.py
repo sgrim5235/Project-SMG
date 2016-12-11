@@ -37,8 +37,8 @@ for row in cursor_location:
         fifty.append(row)
 
 #Using the above script appropriately will yield a list (fifty) of
-#All the Julian Dates of that year that have "DUPS" numbers greater
-#Than 49.0 and also print their significant Julian Date
+    #All the Julian Dates of that year that have "DUPS" numbers greater
+    #Than 49.0 and also print their significant Julian Date
 
 
 def rid_dupes(x):
