@@ -1,6 +1,8 @@
 # Project-SMG
 GISC3200K Final Project
 
+Please view in "RAW" format to view appropriately.
+
 The attached Python file includes codes to simplify the narrowing of data in ArcMap for a specific issue.
 In an ArcMap document, I needed to identify certain elements within 11 different attribute tables that each have thousands
 among thousands of elements.
